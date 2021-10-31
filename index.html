@@ -4,7 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
 	<link rel="shortcut icon" type="image/png" href="https://heb12.com/assets/logo.png">
-	<title></title>
+	<title>Heb12 Quran Reader</title>
 </head>
 <body>
 	<h1>Heb12 Quran Reader</h1>
@@ -12,7 +12,7 @@
 	<p>Loading text...</p>
 	<script src="quran.js"></script>
 	<p>Loaded text.</p>
-	<select id="sura" onselect="showText()"></select>
+	<select id="sura" onchange="showText()"></select>
 	<br>
 	<button onclick="previous()">Previous</button><button onclick="next()">Next</button>
 	<div id="content">asd</div>
@@ -24,7 +24,9 @@
 
 	window.onload = function() {
 		for (var i = 0; i < suras.length; i++) {
-			sura.innerHTML += "<option>" + suras[i].bktlong + "</option>";
+			var e = document.createElement("OPTION");
+			e.innerText = suras[i].bktlong;
+			sura.appendChild(e);
 		}
 	
 		showText();
@@ -38,7 +40,10 @@
 		var selected = suras[sura.selectedIndex].v;
 
 		for (var i = 0; i < selected.length; i++) {
-			content.innerHTML += "<p id='" + String(i + 1) + "'><b>" + String(i + 1) + ":</b> " + selected[i] + "</p>";
+			var e = document.createElement("P");
+			e.id = String(i + 1);
+			e.innerText =  e.id + ": " + selected[i];
+			content.appendChild(e)
 		}
 	}
 
