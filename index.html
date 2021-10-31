@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" type="image/png" href="https://heb12.com/assets/logo.png">
+	<title></title>
+</head>
+<body>
+	<h1>Heb12 Quran Reader</h1>
+	<p>Text was acquired from https://www.ibiblio.org/xml/examples/religion/quran/quran.xml and converted to JSON.</p>
+	<p>Loading text...</p>
+	<script src="quran.js"></script>
+	<p>Loaded text.</p>
+	<select id="sura" onselect="showText()"></select>
+	<br>
+	<button onclick="previous()">Previous</button><button onclick="next()">Next</button>
+	<div id="content">asd</div>
+</body>
+<script>
+	var sura = document.getElementById("sura");
+	var content = document.getElementById("content");
+	var suras = text.tstmt.suracoll.sura;
+
+	window.onload = function() {
+		for (var i = 0; i < suras.length; i++) {
+			sura.innerHTML += "<option>" + suras[i].bktlong + "</option>";
+		}
+	
+		showText();
+	}
+
+	function showText() {
+		while (content.firstChild) {
+			content.removeChild(content.firstChild);
+		}
+
+		var selected = suras[sura.selectedIndex].v;
+
+		for (var i = 0; i < selected.length; i++) {
+			content.innerHTML += "<p id='" + String(i + 1) + "'><b>" + String(i + 1) + ":</b> " + selected[i] + "</p>";
+		}
+	}
+
+	function next() {
+		sura.selectedIndex++;
+		showText();
+	}
+
+	function previous() {
+		sura.selectedIndex--;
+		showText();
+	}
+</script>
+</html>
